@@ -16,12 +16,11 @@ const Form = () => {
         fetch(`http://api.weatherapi.com/v1/current.json?key=4c227d8ad9bb4627b56172215220711&q=${userInput}&aqi=no`)
             .then(response => response.json())
             .then(data => 
-                console.log(data),
-                setData(data))
+                setData(data.location),
+                console.log(data.location))
             .catch((error) => {
                 setShowError(!showError)
             })
-        console.log(data)
     },[submit])
 
 //this function tracks user input and stores it in state, attach this function to onChange event of the input in form
@@ -37,7 +36,7 @@ const handleButtonClick = (event) => {
 
     
     return (
-        <>
+        <div>
             <form action="submit">
                 <label htmlFor="input">enter a city:</label>
                 <input onChange={trackInputChange} type="text" />
@@ -59,7 +58,7 @@ const handleButtonClick = (event) => {
                         userInput={userInput}/>
                     : null
             }
-        </>
+        </div>
         
         
 
