@@ -7,15 +7,17 @@ const Form = () => {
     const [submit, setSubmit] = useState(false);
     const [userInput, setUserInput] = useState('');
     const [showError, setShowError] = useState(false);
-    const [data, setData] = useState([]);
+    const [data, setData] = useState({});
+
+
 
 // API call fetch request (useEffect)
     useEffect(() => {
         fetch(`http://api.weatherapi.com/v1/current.json?key=4c227d8ad9bb4627b56172215220711&q=${userInput}&aqi=no`)
             .then(response => response.json())
-            .then(response => 
-            data,
-            setData(data))
+            .then(data => 
+                console.log(data),
+                setData(data))
             .catch((error) => {
                 setShowError(!showError)
             })
@@ -26,11 +28,14 @@ const Form = () => {
 const trackInputChange = (e) => {
     setUserInput(e.target.value)
 }
-    
+
 //attach this function to onClick of button in form.js return
-const handleButtonClick = () => {
+const handleButtonClick = (event) => {
     setSubmit(!submit)
+    event.preventDefault()
 }
+
+    
     return (
         <>
             <form action="submit">
